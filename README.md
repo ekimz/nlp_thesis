@@ -14,31 +14,31 @@ The dataset used was retrieved using Pushshift.io, so upvotes and awards informa
 
 # 1. Data Extraction & Cleaning
 
-File(s): pd2csv_posts.py & pd2csv_comments.py
-Modified code from @Watchful1 to pull posts and comments into organized dataframes into a .csv file instead of .txt file
+File(s): pd2csv_posts.py & pd2csv_comments.py  
+Modified code from @Watchful1 to pull posts and comments into organized dataframes into a .csv file instead of .txt file. 
 Reference: https://github.com/Watchful1/Sketchpad/blob/master/postDownloader.py
 
-File(s): csv_reads.py
-Used answer by Benjamin Ziepert to split csv of posts & comments into 100k and 1m lines each
+File(s): csv_reads.py  
+Used answer by Benjamin Ziepert to split csv of posts & comments into 100k and 1m lines each  
 Reference: https://stackoverflow.com/questions/36445193/splitting-one-csv-into-multiple-files
 
-File(s): split_csv_deleteds
+File(s): split_csv_deleteds  
 Separated removed posts/comments as its own dataset to perform analysis on posts/comments that users left posted for better analysis as any removed or deleted posts/comments can skew results
 
 
 # 2. Sentiment Analysis
 
-File(s): sentiment_scoring.py
-Performed sentiment analysis on each post/comment of every csv file
+File(s): sentiment_scoring.py  
+Performed sentiment analysis on each post/comment of every csv file  
 Reference: negative-words.txt & positive-words.txt
 
-File(s): sentiment_score_analysis.py
-Summarized sentiment analysis scores from each csv file to show min, max, mean, median, std, & var in one file for visualization; used on comments & posts
+File(s): sentiment_score_analysis.py  
+Summarized sentiment analysis scores from each csv file to show min, max, mean, median, std, & var in one file for visualization; used on comments & posts  
 
 
 # 3. TF-IDF
 
-File(s): tf_idf_analysis.py
+File(s): tf_idf_analysis.py  
 Currently working on performing tf-idf on each section for topic analysis
 
 
