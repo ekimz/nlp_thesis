@@ -36,7 +36,7 @@ File(s): sentiment_score_analysis.py
 Summarized sentiment analysis scores from each csv file to show min, max, mean, median, std, & var in one file for visualization; used on comments & posts  
 
 
-# 3. TF-IDF
+# 3. tf-idf
 
 File(s): tf_idf_analysis.py  
 Currently working on performing tf-idf on each section for topic analysis
