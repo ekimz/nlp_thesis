@@ -4,8 +4,8 @@ import numpy as np  # for declaring an array or simply use list
 import math
 from statistics import *
 
-dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/comments_not_deleted/'
-# dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/' for comments
+dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_posts_100k/posts_not_deleted/'
+# dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/comments_not_deleted/' for comments
 directory = os.fsencode(dirstr)
 header = ['batch_date', 'min', 'max', 'mean', 'median', 'std', 'var']
 
@@ -45,4 +45,4 @@ for file in sorted(os.listdir(directory)):
 
 # summary_df.to_csv(dirstr + 'sentiment_scores_summary.csv')
 print(summary_df.head())
-summary_df.to_csv('./comments_not_deleted_sentiment_summary.csv', index=False)
+summary_df.to_csv('./posts_not_deleted_sentiment_summary.csv', index=False)

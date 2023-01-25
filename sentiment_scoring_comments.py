@@ -2,6 +2,7 @@ import re
 import ssl
 import os
 import pandas as pd
+import nltk
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -19,8 +20,8 @@ else:
 # nltk.download('punkt')
 # nltk.download('omw-1.4')
 
-directory = os.fsencode('/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/')
-dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/'
+directory = os.fsencode('/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/comments_not_deleted/')
+dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_comments_1m/comments_not_deleted/'
 
 lemma = WordNetLemmatizer()
 stop_words = stopwords.words('english')
@@ -48,12 +49,13 @@ for file in os.listdir(directory):
         df['total_len'] = df['preprocess'].map(lambda x: len(x))
 
         # open necessary files for sentiment analysis
-        file = open('/Users/eunjikim/PycharmProjects/rRelationships/negative-words.txt',
-                    'r', encoding='ISO-8859-1')
-        neg_words = file.read().split()
-        ile = open('/Users/eunjikim/PycharmProjects/rRelationships/positive-words.txt',
-                   'r', encoding='ISO-8859-1')
-        pos_words = file.read().split()
+        file_pos = open('/Users/eunjikim/PycharmProjects/rRelationships/positive-words.txt',
+                        'r', encoding='ISO-8859-1')
+        pos_words = file_pos.read().split()
+
+        file_neg = open('/Users/eunjikim/PycharmProjects/rRelationships/negative-words.txt',
+                        'r', encoding='ISO-8859-1')
+        neg_words = file_neg.read().split()
 
         # count positive words
         num_pos = df['preprocess'].map(lambda x: len([i for i in x if i in pos_words]))
@@ -65,7 +67,7 @@ for file in os.listdir(directory):
         df['sentiment'] = round((df['pos_count'] - df['neg_count']) / df['total_len'], 2)
 
         # create new file with new name I suppose
-        df.to_csv(dirstr + 'sentiment_' + filename)
+        df.to_csv(dirstr + '_' + filename) # sentiment_
         continue
     else:
         continue

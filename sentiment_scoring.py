@@ -19,8 +19,8 @@ else:
 # nltk.download('punkt')
 # nltk.download('omw-1.4')
 
-directory = os.fsencode('/Users/eunjikim/PycharmProjects/rRelationships/batched_posts_100k/')
-dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_posts_100k/'
+directory = os.fsencode('/Users/eunjikim/PycharmProjects/rRelationships/batched_posts_100k/posts_not_deleted/')
+dirstr = '/Users/eunjikim/PycharmProjects/rRelationships/batched_posts_100k/posts_not_deleted/'
 
 lemma = WordNetLemmatizer()
 stop_words = stopwords.words('english')
@@ -43,7 +43,7 @@ for file in os.listdir(directory):
         # open as a dataframe
         df = pd.read_csv(dirstr + filename)
         # preprocess title
-        preprocess_tag = [text_prep(i) for i in df['title']]  # df[...] is the content you wan analyse
+        preprocess_tag = [text_prep(i) for i in df['title']]  # df[...] is the content you warn analyse
         df['preprocess_title'] = preprocess_tag
         df['total_len_title'] = df['preprocess_title'].map(lambda x: len(x))
         # preprocess post
@@ -52,16 +52,17 @@ for file in os.listdir(directory):
         df['total_len_selftext'] = df['preprocess_selftext'].map(lambda x: len(x))
 
         # open necessary files for sentiment analysis
-        file = open('/Users/eunjikim/PycharmProjects/rRelationships/negative-words.txt',
+        file_neg = open('/Users/eunjikim/PycharmProjects/rRelationships/negative-words.txt',
                     'r', encoding='ISO-8859-1')
-        neg_words = file.read().split()
-        ile = open('/Users/eunjikim/PycharmProjects/rRelationships/positive-words.txt',
+        neg_words = file_neg.read().split()
+        file_pos = open('/Users/eunjikim/PycharmProjects/rRelationships/positive-words.txt',
                    'r', encoding='ISO-8859-1')
-        pos_words = file.read().split()
+        pos_words = file_pos.read().split()
 
         # count positive words
         num_pos_title = df['preprocess_title'].map(lambda x: len([i for i in x if i in pos_words]))
         df['pos_count_title'] = num_pos_title
+
         # count negative words
         num_neg_title = df['preprocess_title'].map(lambda x: len([i for i in x if i in neg_words]))
         df['neg_count_title'] = num_neg_title
@@ -71,17 +72,17 @@ for file in os.listdir(directory):
         # count positive words
         num_pos_selftext = df['preprocess_selftext'].map(lambda x: len([i for i in x if i in pos_words]))
         df['pos_count_selftext'] = num_pos_selftext
+
         # count negative words
         num_neg_selftext = df['preprocess_selftext'].map(lambda x: len([i for i in x if i in neg_words]))
         df['neg_count_selftext'] = num_neg_selftext
 
         df['selftext_sentiment'] = round((df['pos_count_selftext'] - df['neg_count_selftext']) / df['total_len_selftext'], 2)
 
+
         # create new file with new name I suppose
         df.to_csv(dirstr + 'sentiment_' + filename)
-        continue
-    else:
-        continue
+        print('completed sentiment analysis of ' + filename)
 
 # df = pd.read_csv('/Users/eunjikim/PycharmProjects/rRelationships/batched_posts_100k/posts_20080723-20120424.csv')
 
