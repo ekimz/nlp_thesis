@@ -91,6 +91,3 @@ Merge files from tfidf_loop.py into one CSV file, with each row representing a u
 
 File(s): tfidf_plots_comments_pol.py, tfidf_plots_comments.py, tfidf_plots_titles.py  
 Converted dates to number and plotted time series scatterplots of relevant terms (unigrams and bigrams). Organized words to plot by percentage groups for cleaner visualizations (2%, <2%, <0.7%, <0.2%, <0.05%).
-
-
-Currently working on calculating significant results from tf-idf portion
